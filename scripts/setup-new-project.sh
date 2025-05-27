@@ -2,7 +2,6 @@
 
 # 🚀 Flutter Master Template Setup Script
 # This script sets up a new Flutter project from the template
-
 set -e  # Exit on any error
 
 # Colors for output
