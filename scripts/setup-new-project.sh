@@ -4,6 +4,7 @@
 # This script sets up a new Flutter project from the template
 set -e  # Exit on any error
 
+
 # Colors for output
 RED='\033[0;31m'
 GREEN='\033[0;32m'
