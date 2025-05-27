@@ -1,0 +1,43 @@
+import 'package:flutter_bloc/flutter_bloc.dart';
+
+import '../../../../core/usecases/usecase.dart';
+import '../../domain/usecases/get_welcome_message.dart';
+import 'home_event.dart';
+import 'home_state.dart';
+
+class HomeBloc extends Bloc<HomeEvent, HomeState> {
+  HomeBloc({
+    required this.getWelcomeMessage,
+  }) : super(const HomeInitial()) {
+    on<LoadWelcomeMessage>(_onLoadWelcomeMessage);
+    on<RefreshWelcomeMessage>(_onRefreshWelcomeMessage);
+  }
+
+  final GetWelcomeMessage getWelcomeMessage;
+
+  Future<void> _onLoadWelcomeMessage(
+    LoadWelcomeMessage event,
+    Emitter<HomeState> emit,
+  ) async {
+    emit(const HomeLoading());
+    
+    final result = await getWelcomeMessage(NoParams());
+    
+    result.fold(
+      (failure) => emit(HomeError(message: failure.message)),
+      (welcomeMessage) => emit(HomeLoaded(welcomeMessage: welcomeMessage)),
+    );
+  }
+
+  Future<void> _onRefreshWelcomeMessage(
+    RefreshWelcomeMessage event,
+    Emitter<HomeState> emit,
+  ) async {
+    final result = await getWelcomeMessage(NoParams());
+    
+    result.fold(
+      (failure) => emit(HomeError(message: failure.message)),
+      (welcomeMessage) => emit(HomeLoaded(welcomeMessage: welcomeMessage)),
+    );
+  }
+}
