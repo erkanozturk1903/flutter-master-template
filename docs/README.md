@@ -24,4 +24,4 @@ This directory contains comprehensive Flutter development standards and best pra
 
 **Version:** 1.0.0  
 **Last Updated:** 2025-01-27  
-**Author:** Flutter Master Template Team
+**Author:** erkanozturk
