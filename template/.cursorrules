@@ -1,1 +1,253 @@
 
+
+# 🚀 Flutter Master Template - Cursor Rules
+# Version: 1.0.0 | Production-Ready Flutter Development Standards
+
+## 📋 Project Overview
+This is a production-ready Flutter application following Clean Architecture principles, BLoC state management, and comprehensive development standards.
+
+## 🏗️ Architecture Rules
+- Follow Clean Architecture with feature-first organization
+- Separate data, domain, and presentation layers
+- Use dependency injection with get_it and injectable
+- Implement Repository pattern for all data access
+- Keep business logic in use cases and BLoCs
+
+## 📁 Folder Structure Standards
+```
+lib/
+├── core/                          # Shared application core
+│   ├── constants/                 # App-wide constants
+│   ├── di/                       # Dependency injection
+│   ├── error/                    # Error handling
+│   ├── network/                  # Network layer
+│   ├── utils/                    # Utility functions
+│   └── theme/                    # App theming
+├── features/                     # Feature modules
+│   └── feature_name/
+│       ├── data/                 # Data layer
+│       │   ├── datasources/      # Remote & local data sources
+│       │   ├── models/           # Data models
+│       │   └── repositories/     # Repository implementations
+│       ├── domain/               # Domain layer
+│       │   ├── entities/         # Business entities
+│       │   ├── repositories/     # Repository interfaces
+│       │   └── usecases/         # Business use cases
+│       └── presentation/         # Presentation layer
+│           ├── bloc/             # BLoC state management
+│           ├── pages/            # Screen widgets
+│           └── widgets/          # Feature-specific widgets
+└── shared/                       # Shared UI components
+    ├── widgets/                  # Reusable widgets
+    └── components/               # Complex components
+```
+
+## 🎯 State Management (BLoC Pattern)
+- Use flutter_bloc for all state management
+- Create separate Event, State, and BLoC classes
+- Follow naming convention: FeatureName + Event/State/Bloc
+- Use Equatable for Event and State classes
+- Handle loading, success, and error states explicitly
+- Keep BLoCs focused on single responsibility
+
+### BLoC Implementation Example:
+```dart
+// Events
+abstract class AuthEvent extends Equatable {
+  const AuthEvent();
+  @override
+  List<Object?> get props => [];
+}
+
+class LoginRequested extends AuthEvent {
+  const LoginRequested({required this.email, required this.password});
+  final String email;
+  final String password;
+  @override
+  List<Object?> get props => [email, password];
+}
+
+// States
+abstract class AuthState extends Equatable {
+  const AuthState();
+  @override
+  List<Object?> get props => [];
+}
+
+class AuthInitial extends AuthState {}
+class AuthLoading extends AuthState {}
+class AuthAuthenticated extends AuthState {
+  const AuthAuthenticated({required this.user});
+  final User user;
+  @override
+  List<Object?> get props => [user];
+}
+
+// BLoC
+class AuthBloc extends Bloc<AuthEvent, AuthState> {
+  AuthBloc({required this.loginUsecase}) : super(AuthInitial()) {
+    on<LoginRequested>(_onLoginRequested);
+  }
+  
+  final LoginUsecase loginUsecase;
+  
+  Future<void> _onLoginRequested(LoginRequested event, Emitter<AuthState> emit) async {
+    emit(AuthLoading());
+    final result = await loginUsecase(LoginParams(email: event.email, password: event.password));
+    result.fold(
+      (failure) => emit(AuthError(message: failure.message)),
+      (user) => emit(AuthAuthenticated(user: user)),
+    );
+  }
+}
+```
+
+## 🧭 Navigation (GoRouter)
+- Use go_router for all navigation
+- Define routes in separate configuration file
+- Use named routes for better maintainability
+- Implement navigation guards for authentication
+- Support deep linking and web URLs
+
+## 🎨 UI/UX Standards
+- Use Material Design 3 principles
+- Implement responsive design for all screen sizes
+- Create reusable custom widgets in shared/widgets/
+- Use const constructors wherever possible
+- Follow accessibility guidelines (semantic labels, contrast)
+- Support both light and dark themes
+
+## 📊 Data Layer Standards
+- Use Dio for all HTTP requests with proper configuration
+- Implement Repository pattern with interfaces
+- Use json_annotation for model serialization
+- Separate remote and local data sources
+- Implement proper caching strategies
+- Handle network errors gracefully
+
+### Model Example:
+```dart
+@JsonSerializable()
+class UserModel extends Equatable {
+  const UserModel({
+    required this.id,
+    required this.email,
+    required this.firstName,
+    required this.lastName,
+  });
+
+  final String id;
+  final String email;
+  @JsonKey(name: 'first_name')
+  final String firstName;
+  @JsonKey(name: 'last_name')
+  final String lastName;
+
+  factory UserModel.fromJson(Map<String, dynamic> json) => _$UserModelFromJson(json);
+  Map<String, dynamic> toJson() => _$UserModelToJson(this);
+
+  @override
+  List<Object?> get props => [id, email, firstName, lastName];
+}
+```
+
+## 🔒 Security Standards
+- Use flutter_secure_storage for sensitive data
+- Implement proper input validation
+- Hash passwords with crypto package
+- Use certificate pinning for API calls
+- Sanitize user inputs to prevent injection attacks
+- Implement biometric authentication where appropriate
+
+## 🧪 Testing Standards
+- Write unit tests for all business logic
+- Create widget tests for UI components
+- Use mockito for mocking dependencies
+- Achieve minimum 80% test coverage
+- Test both success and failure scenarios
+- Use BlocTest for testing BLoCs
+
+## 📏 Code Quality Standards
+- Follow Effective Dart guidelines
+- Use meaningful variable and function names
+- Add documentation comments for public APIs
+- Keep functions under 50 lines when possible
+- Avoid deeply nested code (max 4 levels)
+- Use early returns to reduce nesting
+
+## 🚨 Error Handling
+- Create custom exception classes
+- Use Either pattern for error handling with dartz
+- Implement global error handling
+- Show user-friendly error messages
+- Log errors appropriately for debugging
+- Handle network timeouts and connectivity issues
+
+## 📱 Performance Rules
+- Use ListView.builder for long lists
+- Implement lazy loading for large datasets
+- Optimize images with cached_network_image
+- Minimize widget rebuilds with proper BLoC usage
+- Use const constructors aggressively
+- Profile app performance regularly
+
+## 🌍 Internationalization
+- Use flutter_localizations for i18n support
+- Store all user-facing strings in translation files
+- Support RTL languages properly
+- Format dates and numbers according to locale
+- Test app in multiple languages
+
+## 📦 File Naming Conventions
+- Use snake_case for all file names
+- Add descriptive suffixes: _screen.dart, _widget.dart, _model.dart
+- Keep file names under 50 characters
+- Use meaningful names that describe functionality
+
+### Examples:
+```
+user_profile_screen.dart
+login_form_widget.dart
+user_model.dart
+auth_repository.dart
+get_current_user_usecase.dart
+auth_bloc.dart
+```
+
+## 📋 Import Organization
+Always organize imports in this order:
+1. Dart core libraries
+2. Flutter libraries  
+3. Third-party packages (alphabetical)
+4. Local project files (relative paths)
+
+## 🔄 Git Commit Standards
+- Use conventional commit format
+- Include emoji for visual categorization
+- Write descriptive commit messages
+- Keep commits focused and atomic
+
+### Commit Examples:
+```
+🎉 Initial commit from Flutter Master Template
+✨ Add user authentication feature
+🐛 Fix login form validation bug
+📝 Update README with setup instructions
+🚀 Deploy version 1.2.0
+```
+
+## 🎯 Best Practices Summary
+1. Always handle loading and error states
+2. Use dependency injection for loose coupling
+3. Write tests for critical business logic
+4. Follow clean code principles
+5. Document complex business logic
+6. Optimize for performance from the start
+7. Consider accessibility in all UI decisions
+8. Keep security in mind for all user data
+9. Use type-safe navigation and API calls
+10. Monitor app performance and crashes
+
+---
+
+**Remember**: These rules ensure consistent, maintainable, and scalable Flutter applications. Follow them consistently across all features and always consider the user experience in every decision.
