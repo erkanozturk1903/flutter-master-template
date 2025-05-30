@@ -1,12 +1,4 @@
-Harika kral! 🔥 **Altıncı döküman:**
-
-## 🎯 **06. Performance & Optimization**
-
-**"Create new file"** → **Dosya yolu:** `docs/06-performance-optimization.md`
-
-**İçerik:**
-
-# ⚡ Performance & Optimization
+⚡ Performance & Optimization
 
 ## Overview
 
