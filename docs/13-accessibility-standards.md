@@ -1,5 +1,3 @@
-## 13-accessibility-standards.md
-
 # 13. Accessibility Standards
 
 > **Flutter Accessibility Essentials** - WCAG compliance and inclusive design for all users.
