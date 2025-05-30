@@ -1,12 +1,4 @@
-Perfect başkan! 🔥 **Dördüncü döküman:**
-
-## 🎯 **04. UI/UX Development Rules**
-
-**"Create new file"** → **Dosya yolu:** `docs/04-ui-ux-development.md`
-
-**İçerik:**
-
-# 🎨 UI/UX Development Rules
+ 🎨 UI/UX Development Rules
 
 ## Overview
 
