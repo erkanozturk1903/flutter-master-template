@@ -1,12 +1,4 @@
-Perfect kral! 🔥 **Beşinci döküman:**
-
-## 🎯 **05. Data Layer & API Integration**
-
-**"Create new file"** → **Dosya yolu:** `docs/05-data-layer-api.md`
-
-**İçerik:**
-
-# 📊 Data Layer & API Integration
+📊 Data Layer & API Integration
 
 ## Overview
 
