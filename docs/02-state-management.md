@@ -1,12 +1,4 @@
-Süper! 🎉 **İkinci döküman:**
-
-## 🎯 **02. State Management Standards**
-
-**"Create new file"** → **Dosya yolu:** `docs/02-state-management.md`
-
-**İçerik:**
-
-# 🎯 State Management Standards
+🎯 State Management Standards
 
 ## Overview
 
