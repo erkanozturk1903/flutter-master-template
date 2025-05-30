@@ -1,12 +1,4 @@
-Tabii kral! 🔥 **Üçüncü döküman:**
-
-## 🎯 **03. Navigation & Routing**
-
-**"Create new file"** → **Dosya yolu:** `docs/03-navigation-routing.md`
-
-**İçerik:**
-
-# 🧭 Navigation & Routing
+🧭 Navigation & Routing
 
 ## Overview
 
