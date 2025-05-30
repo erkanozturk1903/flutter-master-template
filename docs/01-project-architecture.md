@@ -1,11 +1,3 @@
-Perfect kral! 🔥 **Tek tek gidelim!** Böylece her bölüm kendi commit'ine sahip olur ve düzenli olur.
-
-## 🎯 **İlk Döküman: 01. Project Architecture**
-
-**"Create new file"** → **Dosya yolu:** `docs/01-project-architecture.md`
-
-**İçerik:**
-
 # 🏗️ Project Architecture & Structure
 
 ## Overview
